@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('users', [UserController::class, 'create']);
+Route::get('service-orders', [ServiceOrderController::class, 'index']);
 Route::post('service-orders', [ServiceOrderController::class, 'create']);

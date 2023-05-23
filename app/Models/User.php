@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
 
     public $timestamps = FALSE;
-    
+
     protected $fillable = [
         'id',
         'name'
@@ -43,5 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function serviceOrders()
+    {
+        return $this->hasMany(ServiceOrder::class);
+    }
     
 }

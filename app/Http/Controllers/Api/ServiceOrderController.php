@@ -15,6 +15,24 @@ class ServiceOrderController extends Controller
         $this->serviceOrder = $serviceOrder;
     }
 
+    public function index(Request $request)
+    {
+        $serviceOrders = [];
+
+        if ($request->has('filter')) {
+            $conditions = (explode(':', $request->filter));
+            $serviceOrders = $this->serviceOrder->with('user')
+                ->where($conditions[0], $conditions[1], $conditions[2])
+                ->get();
+        } else {
+            $serviceOrders =  $this->serviceOrder->with('user')
+                ->paginate(5);
+        }
+
+        return response()->json($serviceOrders, 200);
+    }
+
+
     public function create(Request $request)
     {
         $serviceOrder = $this->serviceOrder->create([

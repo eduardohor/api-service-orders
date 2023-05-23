@@ -19,4 +19,9 @@ class ServiceOrder extends Model
         'price',
         'userId'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userId');
+    }
 }
