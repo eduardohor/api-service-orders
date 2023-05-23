@@ -19,10 +19,10 @@ class ServiceOrderController extends Controller
     {
         $serviceOrders = [];
 
-        if ($request->has('filter')) {
-            $conditions = (explode(':', $request->filter));
+        if ($request->has('vehicle_plate')) {
+            $condition = $request->vehicle_plate;
             $serviceOrders = $this->serviceOrder->with('user')
-                ->where($conditions[0], $conditions[1], $conditions[2])
+                ->where('vehiclePlate', $condition)
                 ->get();
         } else {
             $serviceOrders =  $this->serviceOrder->with('user')
@@ -36,32 +36,33 @@ class ServiceOrderController extends Controller
     public function create(Request $request)
     {
         $rules = [
-            'vehiclePlate' => 'required|string|max:7',
-            'entryDateTime' => 'required|date',
-            'exitDateTime' => 'required|date',
-            'priceType' => 'required|string|max:55',
+            'vehicle_plate' => 'required|unique:service_orders,vehiclePlate|string|max:7',
+            'entry_date_time' => 'required|date',
+            'exit_date_time' => 'required|date',
+            'price_type' => 'required|string|max:55',
             'price' => 'required',
-            'userId' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
 
         ];
 
         $feedback = [
             'required' => 'O campo :attribute é obrigatório',
-            'vehiclePlate.max' => 'O campo :attribute aceita no máximo 7 caracteres',
-            'priceType.max' => 'O campo :attribute aceita no máximo 55 caracteres',
-            'userId.exists' => 'O id de usuário selecionado é inválido'
+            'vehicle_plate.unique' => 'Placa de veículo já cadastrada',
+            'vehicle_plate.max' => 'O campo :attribute aceita no máximo 7 caracteres',
+            'price_type.max' => 'O campo :attribute aceita no máximo 55 caracteres',
+            'user_id.exists' => 'O id de usuário selecionado é inválido'
 
         ];
 
         $request->validate($rules, $feedback);
 
         $serviceOrder = $this->serviceOrder->create([
-            'vehiclePlate' => $request->vehiclePlate,
-            'entryDateTime' => $request->entryDateTime,
-            'exitDateTime' => $request->exitDateTime,
-            'priceType' => $request->priceType,
+            'vehiclePlate' => $request->vehicle_plate,
+            'entryDateTime' => $request->entry_date_time,
+            'exitDateTime' => $request->exit_date_time,
+            'priceType' => $request->price_type,
             'price' => $request->price,
-            'userId' => $request->userId
+            'userId' => $request->user_id
         ]);
 
         return response()->json($serviceOrder, 201);
