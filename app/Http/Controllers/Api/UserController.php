@@ -17,6 +17,16 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+        $rules = [
+            'name' => 'required|string'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute é obrigatório',
+        ];
+
+        $request->validate($rules, $feedback);
+        
         $user = $this->user->create([
             'name' => $request->name
         ]);

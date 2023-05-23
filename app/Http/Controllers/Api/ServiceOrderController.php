@@ -35,6 +35,26 @@ class ServiceOrderController extends Controller
 
     public function create(Request $request)
     {
+        $rules = [
+            'vehiclePlate' => 'required|string|max:7',
+            'entryDateTime' => 'required|date',
+            'exitDateTime' => 'required|date',
+            'priceType' => 'required|string|max:55',
+            'price' => 'required',
+            'userId' => 'required|exists:users,id',
+
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute é obrigatório',
+            'vehiclePlate.max' => 'O campo :attribute aceita no máximo 7 caracteres',
+            'priceType.max' => 'O campo :attribute aceita no máximo 55 caracteres',
+            'userId.exists' => 'O id de usuário selecionado é inválido'
+
+        ];
+
+        $request->validate($rules, $feedback);
+
         $serviceOrder = $this->serviceOrder->create([
             'vehiclePlate' => $request->vehiclePlate,
             'entryDateTime' => $request->entryDateTime,
