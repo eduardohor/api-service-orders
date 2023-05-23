@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ServiceOrderController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('users', [UserController::class, 'create']);
+Route::post('service-orders', [ServiceOrderController::class, 'create']);
