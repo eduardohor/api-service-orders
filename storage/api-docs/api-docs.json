@@ -1,0 +1,322 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Test Jump",
+        "contact": {
+            "email": "eduardo.hor@outlook.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/service-orders": {
+            "get": {
+                "tags": [
+                    "Ordens de Serviço"
+                ],
+                "summary": "Obtenha todas as ordens de serviço",
+                "description": "Este endpoint retorna todas as ordens de serviço listando 5 ordens por página, com opção de filtro para buscar veículo por placa passando a placa do veículo no campo 'vehicle_plate'",
+                "operationId": "74dde2bbcb995eb0f51d6faefc057907",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Escolher qual página deseja listar",
+                        "required": false
+                    },
+                    {
+                        "name": "vehicle_plate",
+                        "in": "query",
+                        "description": "Filtrar ordem de serviço pela placa do veículo",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados da ordem de serviço",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "vehiclePlate": {
+                                            "description": "Placa do veículo",
+                                            "type": "string",
+                                            "example": "PDF1234"
+                                        },
+                                        "entryDateTime": {
+                                            "description": "Data da entrada do veículo",
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2023-05-22"
+                                        },
+                                        "exitDateTime": {
+                                            "description": "Data da saída do veículo",
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2023-05-23"
+                                        },
+                                        "priceType": {
+                                            "description": "Tipo de Pagamento",
+                                            "type": "string",
+                                            "example": "Cartão de Crédito"
+                                        },
+                                        "price": {
+                                            "description": "Preço cobrado",
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "50.00"
+                                        },
+                                        "userId": {
+                                            "description": "Id do usuário do veículo",
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "user": {
+                                            "description": "Informações do usuário",
+                                            "properties": {
+                                                "id": {
+                                                    "description": "Id do usuário",
+                                                    "type": "integer",
+                                                    "nullable": false
+                                                },
+                                                "name": {
+                                                    "description": "Nome do usuário",
+                                                    "type": "string",
+                                                    "nullable": false
+                                                }
+                                            },
+                                            "type": "object",
+                                            "nullable": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Ordens de Serviço"
+                ],
+                "summary": "Criar nova ordem de serviço",
+                "description": "Este endpoint cria uma nova ordem de serviço",
+                "operationId": "26b6e9502c611e4d7e572c265c290672",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "vehicle_plate",
+                                    "entry_date_time",
+                                    "exit_date_time",
+                                    "price_type",
+                                    "price",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "vehiclePlate": {
+                                        "description": "Placa do veículo",
+                                        "type": "string",
+                                        "example": "PDF8932"
+                                    },
+                                    "entryDateTime": {
+                                        "description": "Data da entrada do veículo",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-05-22"
+                                    },
+                                    "exitDateTime": {
+                                        "description": "Data da saída do veículo",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-05-23"
+                                    },
+                                    "priceType": {
+                                        "description": "Tipo de Pagamento",
+                                        "type": "string",
+                                        "example": "Cartão de Crédito"
+                                    },
+                                    "price": {
+                                        "description": "Preço cobrado",
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "50.00"
+                                    },
+                                    "userId": {
+                                        "description": "Id do usuário do veículo",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "id": {
+                                        "description": "Id do veículo",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Service Order created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "vehicle_plate": {
+                                            "description": "Placa do veículo",
+                                            "type": "string",
+                                            "example": "PDF1234"
+                                        },
+                                        "entry_date_time": {
+                                            "description": "Data da entrada do veículo",
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2023-04-10"
+                                        },
+                                        "exit_date_time": {
+                                            "description": "Data da saída do veículo",
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2023-04-12"
+                                        },
+                                        "price_type": {
+                                            "description": "Tipo de Pagamento",
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "Cartão de Crédito"
+                                        },
+                                        "price": {
+                                            "description": "Preço cobrado",
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "100.00"
+                                        },
+                                        "user_id": {
+                                            "description": "Id do usuário do veículo",
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error: Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Placa de veículo já cadastrada . (and 2 more errors)"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Criar novo usuário",
+                "description": "Este endpoint cria um novo usuário",
+                "operationId": "a794d2c5818707a660863ff972b607ac",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nome do usuário",
+                                        "type": "string",
+                                        "example": "Eduardo Henrique"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "Nome do usuário",
+                                            "type": "string",
+                                            "example": "Eduardo Henrique"
+                                        },
+                                        "id": {
+                                            "description": "Id do usuário",
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Campos incorretos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "O campo nome é obrigatório"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
