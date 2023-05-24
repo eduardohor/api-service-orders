@@ -112,12 +112,12 @@ class ServiceOrderController extends Controller
      *          mediaType="application/x-www-form-urlencoded",
      *          @OA\Schema(
      *             required={"vehicle_plate", "entry_date_time", "exit_date_time", "price_type", "price", "user_id"},
-     *              @OA\Property(property="vehiclePlate", type="string", example="PDF8932", description="Placa do veículo"),
-     *              @OA\Property(property="entryDateTime", type="date", example="2023-05-22", description="Data da entrada do veículo"),
-     *              @OA\Property(property="exitDateTime", type="date", example="2023-05-23", description="Data da saída do veículo"),
-     *              @OA\Property(property="priceType", type="string", example="Cartão de Crédito", description="Tipo de Pagamento"),
+     *              @OA\Property(property="vehicle_plate", type="string", example="PDF8932", description="Placa do veículo"),
+     *              @OA\Property(property="entry_date_time", type="date", example="2023-05-22", description="Data da entrada do veículo"),
+     *              @OA\Property(property="exit_date_time", type="date", example="2023-05-23", description="Data da saída do veículo"),
+     *              @OA\Property(property="price_type", type="string", example="Cartão de Crédito", description="Tipo de Pagamento"),
      *              @OA\Property(property="price", type="double", example="50.00", description="Preço cobrado"),
-     *              @OA\Property(property="userId", type="integer", example="1" , description="Id do usuário do veículo")
+     *              @OA\Property(property="user_id", type="integer", example="1" , description="Id do usuário do veículo")
      *           
      *          )
      *      ),
