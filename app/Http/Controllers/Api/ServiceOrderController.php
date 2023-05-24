@@ -117,8 +117,7 @@ class ServiceOrderController extends Controller
      *              @OA\Property(property="exitDateTime", type="date", example="2023-05-23", description="Data da saída do veículo"),
      *              @OA\Property(property="priceType", type="string", example="Cartão de Crédito", description="Tipo de Pagamento"),
      *              @OA\Property(property="price", type="double", example="50.00", description="Preço cobrado"),
-     *              @OA\Property(property="userId", type="integer", example="1" , description="Id do usuário do veículo"),
-     *              @OA\Property(property="id", type="integer", example="1" , description="Id do veículo"),
+     *              @OA\Property(property="userId", type="integer", example="1" , description="Id do usuário do veículo")
      *           
      *          )
      *      ),
